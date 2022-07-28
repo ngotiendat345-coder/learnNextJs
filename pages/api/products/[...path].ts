@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import httpProxy from 'http-proxy';
+import { env } from 'process';
 
 type Data = {
   name: string
@@ -16,7 +17,7 @@ export default function handler(
   }
   req.headers.cookie = '';
   proxy.web(req, res, {
-      target: 'https://js-post-api.herokuapp.com',
+      target: process.env.API_URL,
       changeOrigin: true,
       selfHandleResponse: false
   })
